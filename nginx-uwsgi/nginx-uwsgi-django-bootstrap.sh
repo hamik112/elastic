@@ -20,10 +20,12 @@ service nginx stop 2> /dev/null
 service uwsgi stop 2> /dev/null
 
 # install Django and an example Django app
+SAMPLE_SRC_PATH=/usr/local/src/django-helloworld
 easy_install Django==1.5.4 || die "Failed to install Django."
 curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi-django.yaml > /etc/uwsgi.yaml || die "Failed to install uWSGI config file."
-mkdir -p /usr/local/src/django-helloworld
-django-admin.py startproject helloworld /usr/local/src/django-helloworld
+rm -rf $SAMPLE_SRC_PATH 
+mkdir -p $SAMPLE_SRC_PATH
+django-admin.py startproject helloworld $SAMPLE_SRC_PATH
 
 # config & start nginx 
 yum install -y nginx-1.2.9 || die "Failed to install nginx."
