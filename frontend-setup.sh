@@ -15,7 +15,7 @@ easy_install uwsgi==1.9.16 || die "Failed to install UWSGI."
 easy_install Flask==0.10.1 || die "Failed to install Flask."
 yum install -y nginx-1.2.9 || die "Failed to install nginx."
 curl -L https://raw.github.com/d5/elastic/master/uwsgi_params > /etc/nginx/uwsgi_params || die "Failed to copy uwsgi_params."
-curl -L https://raw.github.com/d5/elastic/master/uwsgi-nginx.conf > /etc/nginx/nginx.conf || die "Failed to update nginx config."
+curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi.conf > /etc/nginx/nginx.conf || die "Failed to update nginx config."
 chkconfig nginx on
 service nginx start || die "Failed to start nginx service."
 
