@@ -21,6 +21,9 @@ service nginx start || die "Failed to start nginx service."
 rm -rf /usr/local/src/beer
 git clone https://d5dev@bitbucket.org/d5dev/beer.git /usr/local/src/beer || die "Failed to get the code."
 uwsgi --yaml /usr/local/src/beer/app.yaml
+if [ ! grep '/usr/local/src/beer/app.yaml' /etc/rc.local ]; then
+	echo 'sudo uwsgi --yaml /usr/local/src/beer/app.yaml' >> /etc/rc.local
+fi
 
 
 
