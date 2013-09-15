@@ -5,7 +5,7 @@
 
 BIN=/usr/bin/uwsgi
 DESC=uWSGI
-DAEMON_OPTS="--python-path /usr/local/src/beer --daemonize /var/log/uwsgi.log --master --workers 4 --socket 0.0.0.0:10080 --auto-procname --yaml /usr/local/src/beer/uwsgi.yaml"
+DAEMON_OPTS="--yaml /etc/uwsgi.yaml"
 LOCK_FILE=/var/lock/subsys/uwsgi
 
 start () {
