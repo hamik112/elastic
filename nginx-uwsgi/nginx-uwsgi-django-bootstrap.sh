@@ -17,6 +17,12 @@ yum install -y gcc-c++ libxml2-python libxml2-devel python-devel || die "Failed 
 yum install -y nginx-1.2.9 || die "Failed to install nginx."
 easy_install uwsgi==1.9.16 || die "Failed to install uWSGI."
 
+# install Django and an example Django app
+easy_install Django==1.5.4 || die "Failed to install Django."
+curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi-django.yaml > /etc/uwsgi.yaml || die "Failed to install uWSGI config file."
+mkdir -p /usr/local/src/nginx-uwsgi
+django-admin.py startproject helloworld /usr/local/src/nginx-uwsgi
+
 # config & start nginx 
 curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi.conf > /etc/nginx/nginx.conf || die "Failed to update nginx config."
 chkconfig nginx on
@@ -27,9 +33,3 @@ curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi-initd >
 chmod +x /etc/init.d/uwsgi
 chkconfig uwsgi on
 service uwsgi start || die "Failed to start uWSGI service."
-
-# install Django and an example Django app
-easy_install Django==1.5.4 || die "Failed to install Django."
-curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi-django.yaml > /etc/uwsgi.yaml || die "Failed to install uWSGI config file."
-mkdir -p /usr/local/src/nginx-uwsgi
-django-admin.py startproject helloworld /usr/local/src/nginx-uwsgi
