@@ -1,4 +1,3 @@
-#check for root user TODO: replace this with a call to "id"
 if [ `whoami` != "root" ] ; then
 	echo "You must run this script as root. Sorry!"
 	exit 1
