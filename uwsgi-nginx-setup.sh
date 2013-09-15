@@ -1,4 +1,4 @@
-yum update -y
+yum upgrade -y
 yum install -y gcc-c++ libxml2-python libxml2-devel python-devel
 easy_install uwsgi==1.9.16
 easy_install Flask==0.10.1
