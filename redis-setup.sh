@@ -6,6 +6,8 @@ if [ `whoami` != "root" ] ; then
 	exit 1
 fi
 
+yum install -y gcc gcc-c++ make
+
 #install 
 mkdir -p /usr/local/src
 cd /usr/local/src
@@ -13,7 +15,7 @@ wget http://download.redis.io/releases/redis-2.6.16.tar.gz
 tar xzf redis-2.6.16.tar.gz
 rm -f redis-2.6.16.tar.gz
 cd redis-2.6.16
-make install
+make PREFIX=/usr/bin install
 
 die () {
 	echo "ERROR: $1. Aborting!" 
