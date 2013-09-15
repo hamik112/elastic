@@ -23,13 +23,13 @@ chkconfig nginx on
 service nginx start || die "Failed to start nginx service."
 
 # config & start uWSGI
-curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi-flask-initd > /etc/init.d/uwsgi || die "Failed to set up uWSGI service."
+curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi-initd > /etc/init.d/uwsgi || die "Failed to set up uWSGI service."
 chmod +x /etc/init.d/uwsgi
 chkconfig uwsgi on
 service uwsgi start || die "Failed to start uWSGI service."
 
 # install Flask and an example Flask app
 easy_install Flask==0.10.1 || die "Failed to install Flask."
-curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi.yaml > /etc/uwsgi.yaml || die "Failed to install uWSGI config file."
+curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi-flask.yaml > /etc/uwsgi.yaml || die "Failed to install uWSGI config file."
 mkdir -p /usr/local/src/nginx-uwsgi
 curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx_uwsgi_flask_app.py > /usr/local/src/nginx-uwsgi/helloworld.py || die "Failed to install a sample file."
