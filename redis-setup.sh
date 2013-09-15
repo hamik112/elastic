@@ -6,6 +6,7 @@ if [ `whoami` != "root" ] ; then
 	exit 1
 fi
 
+yum upgrade -y
 yum install -y gcc gcc-c++ make
 
 #install 
