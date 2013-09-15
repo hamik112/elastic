@@ -22,15 +22,11 @@ SRC_PATH=/usr/local/src/beer
 rm -rf $SRC_PATH
 git clone https://d5dev@bitbucket.org/d5dev/beer.git $SRC_PATH || die "Failed to get the code."
 
-echo 'uwsgi --python-path /usr/local/src/beer --pidfile /var/run/uwsgi.pid --daemonize /var/log/uwsgi.log --master --workers 4 --socket 0.0.0.0:10080 --auto-procname --yaml /usr/local/src/beer/uwsgi.yaml' > /usr/local/bin/uwsgi_start
-chmod +x /usr/local/bin/uwsgi_start
-echo 'kill -INT `cat /var/run/uwsgi.pid`' > /usr/local/bin/uwsgi_stop
-chmod +x /usr/local/bin/uwsgi_stop
+curl -L https://raw.github.com/d5/elastic/master/uwsgi-initd > /etc/init.d/uwsgi || die "Failed to install uwsgi init.d."
+chmod +x /etc/init.d/uwsgi
 
-/usr/local/bin/uwsgi_start
-if ! grep -q 'su /usr/local/bin/uwsgi_start' /etc/rc.local; then
-	echo "su /usr/local/bin/uwsgi_start" >> /etc/rc.local
-fi
+chkconfig uwsgi on
+service uwsgi start || die "Failed to start uWSGI."
 
 
 
