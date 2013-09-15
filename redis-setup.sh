@@ -6,8 +6,13 @@ if [ `whoami` != "root" ] ; then
 	exit 1
 fi
 
-yum upgrade -y
-yum install -y gcc gcc-c++ make
+die () {
+	echo "ERROR: $1. Aborting!" 
+	exit 1
+}
+
+yum upgrade -y || die "Failed to update yum."
+yum install -y gcc gcc-c++ make || die "Failed to install required software."
 
 #install 
 mkdir -p /usr/local/src
@@ -16,12 +21,7 @@ wget http://download.redis.io/releases/redis-2.6.16.tar.gz
 tar xzf redis-2.6.16.tar.gz
 rm -f redis-2.6.16.tar.gz
 cd redis-2.6.16
-make PREFIX=/usr install
-
-die () {
-	echo "ERROR: $1. Aborting!" 
-	exit 1
-}
+make PREFIX=/usr install || die "Failed to build and install Redis."
 
 REDIS_PORT=6379
 
