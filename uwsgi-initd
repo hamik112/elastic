@@ -1,0 +1,85 @@
+#!/bin/bash
+# chkconfig:   - 90 15
+
+. /etc/rc.d/init.d/functions
+
+BIN=/usr/bin/uwsgi
+DESC=uWSGI
+DAEMON_OPTS="--python-path /usr/local/src/beer --daemonize /var/log/uwsgi.log --master --workers 4 --socket 0.0.0.0:10080 --auto-procname --yaml /usr/local/src/beer/uwsgi.yaml"
+LOCK_FILE=/var/lock/subsys/uwsgi
+
+start () {
+  echo -n "Starting $DESC: "
+  daemon $BIN $DAEMON_OPTS
+  retval=$?
+  echo
+  [ $retval -eq 0 ] && touch $LOCK_FILE
+  return $retval
+}
+
+
+stop () {
+  echo -n "Stopping $DESC: "
+  killproc $BIN
+  retval=$?
+  echo
+  [ $retval -eq 0 ] && rm -f $LOCK_FILE
+  return $retval
+}
+
+
+reload () {
+echo "Reloading $NAME"
+  killproc $BIN -HUP
+  RETVAL=$?
+  echo
+}
+
+restart () {
+    stop
+    start
+}
+
+
+rh_status () {
+  status $BIN
+}
+
+rh_status_q() {
+  rh_status >/dev/null 2>&1
+}
+
+
+case "$1" in
+  start)
+    if ! pidof $BIN >/dev/null; then
+        rh_status_q && exit 0
+        $1
+    else
+        echo -e "\n$DESC is already started...\n"
+    fi
+    ;;
+  stop)
+    if pidof $BIN >/dev/null; then
+        rh_status_q || exit 0
+        $1
+    else
+        echo -e "\n$DESC can not be stoped because its not running...\n"
+    fi
+    ;;
+  restart|force-reload)
+    $1
+    ;;
+  reload)
+    rh_status_q || exit 7
+    $1
+    ;;
+  status)
+    rh_status
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|reload|force-reload|status}" >&2
+    exit 2
+    ;;
+esac
+exit 0
