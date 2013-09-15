@@ -1,5 +1,5 @@
 uwsgi:
-  python-path: /usr/local/src/nginx-uwsgi
+  python-path: /usr/local/src/django-helloworld
   module: helloworld.wsgi:app
   daemonize: /var/log/uwsgi.log
   master: 1
