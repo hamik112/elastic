@@ -19,3 +19,9 @@ curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi.conf > /etc/nginx/n
 chkconfig nginx on
 service nginx start || die "Failed to start nginx service."
 
+git clone https://d5dev@bitbucket.org/d5dev/beer.git /usr/local/src/beer || die "Failed to get the code."
+mkdir -p /etc/uwsgi
+cp /usr/local/src/beer/app.yaml /etc/uwsgi/beer.yaml
+curl -L https://raw.github.com/d5/elastic/master/etc-init-uwsgi.conf > /etc/init/uwsgi.conf || die "Failed to set up uWSGI init."
+
+
