@@ -21,6 +21,7 @@ service nginx start || die "Failed to start nginx service."
 
 rm -rf /usr/local/src/beer
 git clone https://d5dev@bitbucket.org/d5dev/beer.git /usr/local/src/beer || die "Failed to get the code."
-curl -L https://raw.github.com/d5/elastic/master/etc-init-uwsgi.conf > /etc/init/uwsgi.conf || die "Failed to set up uWSGI init."
+uwsgi --yaml /usr/local/src/beer/app.yaml
+
 
 
