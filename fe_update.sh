@@ -9,12 +9,12 @@ die () {
 }
 
 service nginx stop || die "Failed to stop nginx service."
-kill -INT `cat /tmp/uwsgi.pid`
+/usr/local/bin/uwsgi_stop
 
 rm -rf /usr/local/src/beer
 git clone https://d5dev@bitbucket.org/d5dev/beer.git /usr/local/src/beer || die "Failed to get the code."
 
-uwsgi --yaml /usr/local/src/beer/app.yaml
+/usr/local/bin/uwsgi_start
 service nginx start || die "Failed to start nginx service."
 
 
