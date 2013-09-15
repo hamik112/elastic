@@ -29,8 +29,8 @@ echo 'uwsgi --python-path $SRC_PATH --pidfile /var/run/uwsgi.pid --daemonize /va
 echo 'kill -INT `cat /var/run/uwsgi.pid`' > $UWSGI_STOP_PATH
 
 sh $UWSGI_START_PATH
-if ! grep -q '$UWSGI_START_PATH' /etc/rc.local; then
-	echo "sh -c '$UWSGI_START_PATH'" >> /etc/rc.local
+if ! grep -q 'sh $UWSGI_START_PATH' /etc/rc.local; then
+	echo "sh $UWSGI_START_PATH" >> /etc/rc.local
 fi
 
 
