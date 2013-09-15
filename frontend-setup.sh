@@ -18,11 +18,19 @@ curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi.conf > /etc/nginx/n
 chkconfig nginx on
 service nginx start || die "Failed to start nginx service."
 
-rm -rf /usr/local/src/beer
-git clone https://d5dev@bitbucket.org/d5dev/beer.git /usr/local/src/beer || die "Failed to get the code."
-uwsgi --yaml /usr/local/src/beer/app.yaml
-if ! grep -q '/usr/local/src/beer/app.yaml' /etc/rc.local; then
-	echo 'sudo uwsgi --yaml /usr/local/src/beer/app.yaml' >> /etc/rc.local
+SRC_PATH=/usr/local/src/beer
+rm -rf $SRC_PATH
+git clone https://d5dev@bitbucket.org/d5dev/beer.git $SRC_PATH || die "Failed to get the code."
+
+UWSGI_START_PATH=/usr/local/bin/uwsgi_start
+UWSGI_STOP_PATH=/usr/local/bin/uwsgi_stop
+
+echo 'uwsgi --python-path $SRC_PATH --pidfile /var/run/uwsgi.pid --daemonize /var/log/uwsgi.log --master --workers 4 --socket 0.0.0.0:10080 --auto-procname --yaml $SRC_PATH/app.yaml' > $UWSGI_START_PATH
+echo 'kill -INT `cat /var/run/uwsgi.pid`' > $UWSGI_STOP_PATH
+
+sh $UWSGI_START_PATH
+if ! grep -q '$UWSGI_START_PATH' /etc/rc.local; then
+	echo "sh -c '$UWSGI_START_PATH'" >> /etc/rc.local
 fi
 
 
