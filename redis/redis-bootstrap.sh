@@ -29,3 +29,7 @@ mkdir -p /var/redis
 curl -L https://raw.github.com/d5/elastic/master/redis/redis-initd > /etc/init.d/redis || die "Failed to setup init.d."
 curl -L https://raw.github.com/d5/elastic/master/redis/redis.conf > /etc/redis/$REDIS_PORT.conf || die "Failed to install reids.conf."
 mkdir -p /var/redis/$REDIS_PORT
+chkconfig redis on
+
+# start Redis
+service redis start
