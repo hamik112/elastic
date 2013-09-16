@@ -1,12 +1,12 @@
-# nginx-uwsgi
+# Nginx-uWSGI
 
-To bootstrap the node with [nginx](http://wiki.nginx.org/) + [uwsgi](http://projects.unbit.it/uwsgi/) + [Flask](http://flask.pocoo.org), run:
+To bootstrap the node with [Nginx](http://wiki.nginx.org/) + [uWSGI](http://projects.unbit.it/uwsgi/) + [Flask](http://flask.pocoo.org), run:
 
 ```
 curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi-flask-bootstrap.sh | sudo sh
 ```
 
-To bootstrap the node with [nginx](http://wiki.nginx.org/) + [uwsgi](http://projects.unbit.it/uwsgi/) + [Django](https://www.djangoproject.com), run:
+To bootstrap the node with [Nginx](http://wiki.nginx.org/) + [uWSGI](http://projects.unbit.it/uwsgi/) + [Django](https://www.djangoproject.com), run:
 
 ```
 curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi-django-bootstrap.sh | sudo sh
@@ -14,7 +14,7 @@ curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi-django-
 
 ## Versions
 
-* nginx 1.2.9
+* Nginx 1.2.9
 * uWSGI 1.9.16
 * Django 1.5.4
 * Flask 0.10.1
