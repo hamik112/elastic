@@ -1,6 +1,6 @@
 uwsgi:
   python-path: /usr/local/src/django-helloworld
-  module: helloworld.wsgi:app
+  module: helloworld.wsgi:application
   daemonize: /var/log/uwsgi.log
   master: 1
   workers: 4
