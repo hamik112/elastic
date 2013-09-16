@@ -26,8 +26,6 @@ make -C $REDIS_DIR install || die "Failed to build and install Redis."
 # make Redis as a service
 mkdir -p /etc/redis
 mkdir -p /var/redis
-cp $REDIS_DIR/utils/redis_init_script /etc/init.d/redis_$REDIS_PORT
+curl -L https://raw.github.com/d5/elastic/master/redis/redis-initd > /etc/init.d/redis || die "Failed to setup init.d."
 curl -L https://raw.github.com/d5/elastic/master/redis/redis.conf > /etc/redis/$REDIS_PORT.conf || die "Failed to install reids.conf."
 mkdir -p /var/redis/$REDIS_PORT
-
-update-rc.d redis_$REDIS_PORT defaults
