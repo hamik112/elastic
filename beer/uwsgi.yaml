@@ -1,0 +1,8 @@
+uwsgi:
+  python-path: /usr/local/src/beer
+  module: beer:app
+  daemonize: /var/log/uwsgi.log
+  master: 1
+  workers: 4
+  socket: 0.0.0.0:9090
+  auto-procname: 1
