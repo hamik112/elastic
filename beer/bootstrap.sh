@@ -4,6 +4,7 @@ die() { echo "ERROR: $1. Aborting!"; exit 1; }
 
 # install dependencies
 yum install -y git
+easy_install Flask-SQLAlchemy==1.0 || die "Failed to install Flask-SQLAlchemy."
 easy_install Flask-OpenID==1.1.1 || die "Failed to install Flask-OpenID."
 
 # stop services
