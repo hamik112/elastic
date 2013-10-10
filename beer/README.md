@@ -9,12 +9,6 @@ curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi-flask-b
 curl -L https://raw.github.com/d5/elastic/master/beer/bootstrap.sh | sudo sh
 ```
 
-To bootstrap the back-end nodes, run:
-
-```
-curl -L https://raw.github.com/d5/elastic/master/redis/redis-bootstrap.sh | sudo sh
-```
-
 ## Tested EC2 images
 
 * Amazon Linux AMI x86_64 PV EBS - amzn-ami-pv-2013.03.1.x86_64-ebs (ami-0358ce33)
