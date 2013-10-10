@@ -17,9 +17,6 @@ git clone https://d5dev@bitbucket.org/d5dev/beer.git /usr/local/src/beer || die 
 
 # configure
 cp -f /usr/local/src/beer/deploy/uwsgi.yaml /etc/uwsgi.yaml
-# configure
-cp -f /usr/local/src/beer/deploy/prod.conf.py /etc/beer.conf.py
-export BEER_CONFIG_FILE=/etc/beer.conf.py
 
 # start services
 service uwsgi start || die "Failed to start uWSGI service."
