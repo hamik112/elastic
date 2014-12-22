@@ -12,8 +12,8 @@ if [ `whoami` != "root" ] ; then
 fi
 
 # install required
-yum upgrade -y || die "Failed to update yum."
-yum install -y gcc-c++ libxml2-python libxml2-devel python-devel || die "Failed to install required software."
+apt-get upgrade -y || die "Failed to update yum."
+apt-get install -y gcc-c++ libxml2-python libxml2-devel python-devel || die "Failed to install required software."
 
 # try stopping services
 service nginx stop 2> /dev/null
@@ -26,7 +26,7 @@ mkdir -p /usr/local/src/flask-helloworld
 curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx_uwsgi_flask_app.py > /usr/local/src/flask-helloworld/helloworld.py || die "Failed to install a sample file."
 
 # config & start nginx 
-yum install -y nginx-1.2.9 || die "Failed to install nginx."
+apt-get install -y nginx-1.2.9 || die "Failed to install nginx."
 curl -L https://raw.github.com/d5/elastic/master/nginx-uwsgi/nginx-uwsgi.conf > /etc/nginx/nginx.conf || die "Failed to update nginx config."
 chkconfig nginx on
 service nginx start || die "Failed to start nginx service."
