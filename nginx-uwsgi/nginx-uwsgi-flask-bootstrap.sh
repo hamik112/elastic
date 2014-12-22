@@ -1,16 +1,4 @@
 #!/bin/sh
-
-# Dependencies:
-#	nginx 1.2.9
-#	uwsgi 1.9.16
-#	Flask 0.10.1
-die() { echo "ERROR: $1. Aborting!"; exit 1; }
-
-if [ `whoami` != "root" ] ; then
-	die "You must be root to run this."
-fi
-
-# install required
 apt-get upgrade -y || die "Failed to update yum."
 apt-get install -y gcc-c++ libxml2-python libxml2-devel python-devel || die "Failed to install required software."
 
