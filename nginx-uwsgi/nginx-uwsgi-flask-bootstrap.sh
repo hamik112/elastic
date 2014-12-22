@@ -4,7 +4,6 @@
 #	nginx 1.2.9
 #	uwsgi 1.9.16
 #	Flask 0.10.1
-
 die() { echo "ERROR: $1. Aborting!"; exit 1; }
 
 if [ `whoami` != "root" ] ; then
